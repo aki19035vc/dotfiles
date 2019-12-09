@@ -41,17 +41,24 @@ fi
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
 
+# ディレクトリ名だけで移動
+setopt auto_cd
 
-#cdを打ったら自動的にlsを打ってくれる関数
-function cdls(){
-    builtin cd $@ && ls -aG;
-}
+# ls関連
+case "${OSTYPE}" in
+    freebsd*|darwin*)
+        alias ls="ls -aG"
+        ;;
+    linux*)
+        alias ls="ls -a --color"
+        ;;
+esac
+
+chpwd() {ls}
+alias ll='ls -l'
+
 
 # alias
-alias ls='ls -aG'
-alias ll='ls -l'
-alias cd="cdls"
-
-alias ssh-kki='ssh t16cs048@bw02.kki.yamanashi.ac.jp'
-alias ssh-kki-jupyter='ssh -L 8888:localhost:8888 t16cs048@bw01.kki.yamanashi.ac.jp -Y'
+alias ssh-kki='ssh t16cs048@kw02.kki.yamanashi.ac.jp'
+alias ssh-kki-jupyter='ssh -L 8888:localhost:8888 t16cs048@kw02.kki.yamanashi.ac.jp -Y'
 alias ssh-nabe='ssh fujisaki@ai.cs.yamanashi.ac.jp -p 40022'
