@@ -405,6 +405,11 @@ you should place your code here."
 
   ;; ruby-modeにおけるマジックコメントの自動挿入を抑制
   (setq ruby-insert-encoding-magic-comment nil)
+
+  ;; KKI環境において，magitが見にいくパスを変更
+  (defun set-magit-git-executable-in-kki()
+    (interactive)
+    (setq magit-git-executable "/home/t16cs048/local/bin/bin/git"))
   )
 
 ;; Do not writ fenything past this comment. This is where Emacs will
