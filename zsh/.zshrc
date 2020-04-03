@@ -62,3 +62,6 @@ alias ll='ls -l'
 alias ssh-kki='ssh t16cs048@kw02.kki.yamanashi.ac.jp'
 alias ssh-kki-jupyter='ssh -L 8888:localhost:8888 t16cs048@kw02.kki.yamanashi.ac.jp -Y'
 alias ssh-nabe='ssh fujisaki@ai.cs.yamanashi.ac.jp -p 40022'
+
+# pyenv
+eval "$(pyenv init -)"
