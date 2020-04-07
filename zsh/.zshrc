@@ -59,9 +59,14 @@ alias ll='ls -l'
 
 
 # alias
-alias ssh-kki='ssh t16cs048@kw02.kki.yamanashi.ac.jp'
-alias ssh-kki-jupyter='ssh -L 8888:localhost:8888 t16cs048@kw02.kki.yamanashi.ac.jp -Y'
-alias ssh-nabe='ssh fujisaki@ai.cs.yamanashi.ac.jp -p 40022'
+
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
 
 # pyenv
-eval "$(pyenv init -)"
+if which rbenv > /dev/null; then eval "$(pyenv init -)"; fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"

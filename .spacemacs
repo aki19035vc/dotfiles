@@ -43,8 +43,8 @@ values."
      imenu-list
 
      auto-completion
-     spell-checking
-     ;; syntax-checking
+     ;; spell-checking
+     syntax-checking
 
      git
      version-control
@@ -371,8 +371,9 @@ you should place your code here."
              ("C-m" . magit-status))
 
   ;; company
-  (bind-keys :map company-active-map
-             ("C-h" . nil))
+  (with-eval-after-load 'company
+    (bind-keys :map company-active-map
+               ("C-h" . nil)))
 
   ;; 対象ウィンドウの表示行に応じて，スクロール数を変更
   (defun my-scroll-up-command()
@@ -411,6 +412,7 @@ you should place your code here."
   (defun set-magit-git-executable-in-kki()
     (interactive)
     (setq magit-git-executable "/home/t16cs048/local/bin/bin/git"))
+
   )
 
 ;; Do not writ fenything past this comment. This is where Emacs will
