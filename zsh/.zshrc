@@ -55,10 +55,11 @@ case "${OSTYPE}" in
 esac
 
 chpwd() {ls}
-alias ll='ls -l'
 
 
 # alias
+alias ll='ls -l'
+
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
