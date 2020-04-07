@@ -1,9 +1,7 @@
 DOTROOT=$HOME/dotfiles
 
-# homebrewのインストール
-#./$DOTROOT/homebrew/install.sh
-
-install_list=("zsh"
+install_list=("homebrew"
+              "zsh"
               "rbenv"
               "pyenv"
               "source-code-pro"
@@ -15,7 +13,6 @@ install_list=("zsh"
               "hyperswitch"
               "karabiner-elements"
              )
-
 
 for i in "${install_list[@]}"
 do
