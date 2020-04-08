@@ -371,6 +371,7 @@ you should place your code here."
              ("C-m" . magit-status))
 
   ;; company
+  (global-company-mode)
   (with-eval-after-load 'company
     (bind-keys :map company-active-map
                ("C-h" . nil)))
