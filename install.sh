@@ -12,6 +12,7 @@ install_list=("homebrew"
               "slack"
               "hyperswitch"
               "karabiner-elements"
+              "tree"
              )
 
 for i in "${install_list[@]}"
