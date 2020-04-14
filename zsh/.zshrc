@@ -59,6 +59,7 @@ chpwd() {ls}
 
 # alias
 alias ll='ls -l'
+alias grep='grep --color'
 
 
 # rbenv
