@@ -13,12 +13,13 @@ install_list=("homebrew"
               "hyperswitch"
               "karabiner-elements"
               "tree"
+              "git"
              )
 
 for i in "${install_list[@]}"
 do
-    target=$DOTROOT/$i/install.sh
-    chmod u+x $target
-    ./$target
-    #ls -l $DOTROOT/$i/install.sh
+  target=$DOTROOT/$i/install.sh
+  chmod u+x $target
+  ./$target
+  #ls -l $DOTROOT/$i/install.sh
 done

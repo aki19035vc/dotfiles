@@ -1,0 +1,8 @@
+[color]
+	ui = auto
+
+[alias]
+	br = branch
+	co = checkout
+	me = merge
+	st = status
