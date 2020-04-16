@@ -62,6 +62,7 @@ values."
      yaml
      emacs-lisp
      markdown
+     org
      latex
      ;; (shell :variables
      ;;        shell-default-height 30
