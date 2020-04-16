@@ -61,7 +61,7 @@ source $HOME/dotfiles/zsh/psg.sh
 # alias
 alias ll='ls -l'
 alias grep='grep --color'
-alias em='em_g(){emacs &1 &};em_g'
+alias em='em_g(){emacs $1 &};em_g'
 
 
 # rbenv
