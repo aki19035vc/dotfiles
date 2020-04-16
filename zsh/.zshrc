@@ -56,6 +56,7 @@ esac
 
 chpwd() {ls}
 
+source $HOME/dotfiles/zsh/psg.sh
 
 # alias
 alias ll='ls -l'
