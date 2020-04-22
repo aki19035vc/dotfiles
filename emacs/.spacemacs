@@ -57,7 +57,13 @@ values."
             c-basic-offset 4)
      ruby
      python
-     html
+     (html :variables
+           web-mode-markup-indent-offset 2
+           web-mode-css-indent-offset 2
+           web-mode-code-indent-offset 2
+           web-mode-style-padding 2
+           web-mode-script-padding 2
+           css-indent-offset 2)
      javascript
      yaml
      emacs-lisp
@@ -379,6 +385,10 @@ you should place your code here."
   (with-eval-after-load 'company
     (bind-keys :map company-active-map
                ("C-h" . nil)))
+
+  ;; html
+  (with-eval-after-load 'web
+    (electric-pair-mode 1))
 
   ;; 対象ウィンドウの表示行に応じて，スクロール数を変更
   (defun my-scroll-up-command()
