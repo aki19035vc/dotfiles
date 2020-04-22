@@ -19,6 +19,7 @@ zplug "junegunn/fzf-bin", \
       as:command, \
       rename-to:fzf, \
       use:"*darwin*amd64*"
+export FZF_DEFAULT_OPTS="--height 40% --reverse --border"
 
 # zplug "b4b4r07/enhancd", use:init.sh
 # # zplug "mollifier/anyframe", at:4c23cb60
