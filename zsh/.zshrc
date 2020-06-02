@@ -57,12 +57,14 @@ esac
 
 chpwd() {ls}
 
+# 自作関数
 source $HOME/dotfiles/zsh/psg.sh
+em() { emacs $1 & }
 
 # alias
 alias ll='ls -l'
 alias grep='grep --color'
-alias em='em_g(){emacs $1 &};em_g'
+alias be='bundle exec'
 
 
 # rbenv

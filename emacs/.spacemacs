@@ -31,8 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
-     sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -64,15 +62,17 @@ values."
            web-mode-style-padding 2
            web-mode-script-padding 2
            css-indent-offset 2)
-     javascript
+     (javascript :variables
+                 js-indent-level 2)
      yaml
      emacs-lisp
      markdown
      org
      latex
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     csv
+     (sql :variables
+          sql-capitalize-keywords t
+          sql-basic-offset 2)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these

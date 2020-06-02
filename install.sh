@@ -14,6 +14,8 @@ install_list=("homebrew"
               "karabiner-elements"
               "tree"
               "git"
+              "vagrant"
+              "virtualbox"
              )
 
 for i in "${install_list[@]}"
