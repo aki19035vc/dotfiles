@@ -16,6 +16,7 @@ install_list=("homebrew"
               "git"
               "vagrant"
               "virtualbox"
+              "mutagen"
              )
 
 for i in "${install_list[@]}"
