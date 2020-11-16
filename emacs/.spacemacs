@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     typescript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -53,7 +54,14 @@ values."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-basic-offset 4)
-     ruby
+     (ruby :variables
+           ;; ruby-enable-enh-ruby-mode t
+           ruby-insert-encoding-magic-comment nil
+           ;; ruby-deep-indent-paren nil
+           ;; ruby-backend 'lsp
+           )
+     ruby-on-rails
+
      python
      (html :variables
            web-mode-markup-indent-offset 2
@@ -61,9 +69,12 @@ values."
            web-mode-code-indent-offset 2
            web-mode-style-padding 2
            web-mode-script-padding 2
-           css-indent-offset 2)
+           css-indent-offset 2
+           css-fontify-colors nil)
      (javascript :variables
-                 js-indent-level 2)
+                 js-indent-level 2
+                 js2-strict-missing-semi-warning nil
+                 js2-missing-semi-one-line-override nil)
      yaml
      emacs-lisp
      markdown
@@ -73,6 +84,7 @@ values."
      (sql :variables
           sql-capitalize-keywords t
           sql-basic-offset 2)
+     docker
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -82,6 +94,10 @@ values."
    '(
      all-the-icons
      all-the-icons-dired
+     vue-mode
+     ;; lsp-ui
+     ;; lsp-vue
+     ;; company-lsp
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -358,7 +374,9 @@ you should place your code here."
    ("C-x ?" . help-command) ; ヘルプ呼び出し
    ("M-8" . switch-to-prev-buffer) ; バッファ移動
    ("M-9" . switch-to-next-buffer) ; バッファ移動
-   ([?¥] . [?\\])) ; ¥の代わりにバックスラッシュを入力する
+   ("C-i" . indent-for-tab-command)
+   ([?¥] . [?\\]) ; ¥の代わりにバックスラッシュを入力する
+   )
 
   ;;ウィンドウ移動のキーバインドを設定
   (bind-keys*
@@ -389,7 +407,6 @@ you should place your code here."
   ;; html
   (with-eval-after-load 'web
     (electric-pair-mode 1))
-
   ;; 対象ウィンドウの表示行に応じて，スクロール数を変更
   (defun my-scroll-up-command()
     (interactive)
@@ -420,9 +437,72 @@ you should place your code here."
   (setq-default truncate-lines t)
   (setq-default truncate-partial-width-windows t)
 
-  ;; ruby-modeにおけるマジックコメントの自動挿入を抑制
-  (setq ruby-insert-encoding-magic-comment nil)
+  ;; org-modeの見出しのフォントサイズ
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+   )
 
+  (require 'vue-mode)
+  (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") nil)
+  (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") nil)
+  (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") nil)
+  (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") nil)
+  (setq mmm-js-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
+  (setq mmm-typescript-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
+  (set-face-background 'mmm-default-submode-face nil)
+  ;; (setq pug-tab-width 2)
+  ;; (add-to-list 'vue-mode-hook #'smartparens-mode)
+
+  ;; (require 'lsp-ui)
+  ;; (require 'lsp-vue)
+  ;; (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
+  ;; (with-eval-after-load 'lsp-ui
+  ;;   (require 'lsp-ui-flycheck))
+
+  ;; (require 'company-lsp)
+  ;; (push 'company-lsp company-backends)
+
+
+  ;; (use-package mmm-mode
+  ;;   :ensure t
+  ;;   :config
+  ;;   (setq mmm-global-mode 'maybe)
+  ;;   (setq mmm-submode-decoration-level 2)
+  ;;   ;; (set-face-background 'mmm-default-submode-face "gray13")
+
+  ;;   (mmm-add-classes
+  ;;    '((vue-embeded-slim-mode
+  ;;       :submode slim-mode
+  ;;       :front "^<template.*lang=\"slim\">\n"
+  ;;       :back "^</template>")
+  ;;      (vue-embeded-pug-mode
+  ;;       :submode pug-mode
+  ;;       :front "^<template.*lang=\"pug\">\n"
+  ;;       :back "^</template>")
+  ;;      (vue-embeded-web-mode
+  ;;       :submode web-mode
+  ;;       :front "^<template>\n"
+  ;;       :back "^</template>\n")
+  ;;      (vue-embeded-js-mode
+  ;;       :submode js-mode
+  ;;       :front "^<script>\n"
+  ;;       :back "^</script>")
+  ;;      (vue-embeded-scss-mode
+  ;;       :submode scss-mode
+  ;;       :front "^<style.*lang=\"scss\">\n"
+  ;;       :back "^</style>")))
+
+  ;;   (mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-embeded-slim-mode)
+  ;;   (mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-embeded-pug-mode)
+  ;;   (mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-embeded-web-mode)
+  ;;   (mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-embeded-js-mode)
+  ;;   (mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-embeded-scss-mode)
+  ;;   )
+  ;; (add-to-list 'auto-mode-alist '("\\.vue\\" . mmm-mode))
   )
 
 ;; Do not writ fenything past this comment. This is where Emacs will
@@ -434,10 +514,14 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (insert-shebang fish-mode company-shell csv-mode sql-indent imenu-list auctex-latexmk company-auctex auctex all-the-icons-dired all-the-icons memoize yapfify yaml-mode web-mode unfill tagedit smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup live-py-mode hy-mode htmlize helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit transient git-commit with-editor emoji-cheat-sheet-plus emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-emoji company-c-headers company-anaconda company cmake-mode clang-format chruby bundler inf-ruby auto-yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete js2-mode js-doc coffee-mode powerline spinner hydra lv parent-mode projectile pkg-info epl flx helm-themes helm-swoop helm-projectile helm-mode-manager helm-flx helm-descbinds helm-ag ace-jump-helm-line helm helm-core ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile async aggressive-indent adaptive-wrap ace-window ace-link))))
+    (tide typescript-mode vue-mode edit-indirect ssass-mode vue-html-mode lsp-ui company-lsp lsp-mode ht dockerfile-mode docker tablist docker-tramp projectile-rails inflections feature-mode enh-ruby-mode insert-shebang fish-mode company-shell csv-mode sql-indent imenu-list auctex-latexmk company-auctex auctex all-the-icons-dired all-the-icons memoize yapfify yaml-mode web-mode unfill tagedit smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup live-py-mode hy-mode htmlize helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit transient git-commit with-editor emoji-cheat-sheet-plus emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-emoji company-c-headers company-anaconda company cmake-mode clang-format chruby bundler inf-ruby auto-yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete js2-mode js-doc coffee-mode powerline spinner hydra lv parent-mode projectile pkg-info epl flx helm-themes helm-swoop helm-projectile helm-mode-manager helm-flx helm-descbinds helm-ag ace-jump-helm-line helm helm-core ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile async aggressive-indent adaptive-wrap ace-window ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))

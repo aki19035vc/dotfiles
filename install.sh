@@ -14,15 +14,19 @@ install_list=("homebrew"
               "karabiner-elements"
               "tree"
               "git"
-              "vagrant"
               "virtualbox"
+              "vagrant"
               "mutagen"
+              "sequel-pro"
+              "source-highlight"
+              "circleci"
              )
+
+# circleci-token: 84886554c82f231da25fd57b454e6099d150cbb6
 
 for i in "${install_list[@]}"
 do
   target=$DOTROOT/$i/install.sh
   chmod u+x $target
-  ./$target
-  #ls -l $DOTROOT/$i/install.sh
+  $target
 done

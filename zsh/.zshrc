@@ -11,7 +11,6 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-
 # GitHub Releases からインストールする
 # また、コマンドは rename-to でリネームできる
 zplug "junegunn/fzf-bin", \
@@ -19,17 +18,7 @@ zplug "junegunn/fzf-bin", \
       as:command, \
       rename-to:fzf, \
       use:"*darwin*amd64*"
-export FZF_DEFAULT_OPTS="--height 40% --reverse --border"
-
-# zplug "b4b4r07/enhancd", use:init.sh
-# # zplug "mollifier/anyframe", at:4c23cb60
-
-
-# zplug "junegunn/fzf-bin", \
-#       from:gh-r, \
-#       as:command, \
-#       rename-to:fzf, \
-#       on zplug "b4b4r07/enhancd", of:enhancd.sh
+export FZF_DEFAULT_OPTS="--height 55% --reverse --border"
 
 # 未インストール項目をインストールする
 if ! zplug check --verbose; then
@@ -57,18 +46,54 @@ esac
 
 chpwd() {ls}
 
-# 自作関数
-source $HOME/dotfiles/zsh/psg.sh
+# 関数
 em() { emacs $1 & }
+
+dcs-clean() {docker-sync stop & docker-sync start & docker-compose up}
+
+# fzf: ヒストリーのインクリメンタル検索
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N select-history
+bindkey '^r' select-history
+
+# fzf: cdでの移動をインクリメンタルに選択
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fzf: ブランチをインクリメンタルにチェックアウト
+fgc() {
+  git branch | fzf | xargs git checkout
+}
+
+# fzf: git log で表示した各コミットをshow
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+                FZF-EOF"
+}
 
 # alias
 alias ll='ls -l'
 alias grep='grep --color'
 alias be='bundle exec'
+alias dcs='docker-compose -f docker-compose.yml -f docker-compose-dev.yml'
 
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
@@ -77,3 +102,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 if which rbenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESS="-R"
