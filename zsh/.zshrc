@@ -84,6 +84,11 @@ fshow() {
                 FZF-EOF"
 }
 
+fdocker_exec_bash() {
+  docker_id=$(docker ps | fzf | awk '{print $1}')
+  docker exec -it $docker_id bash
+}
+
 # alias
 alias ll='ls -l'
 alias grep='grep --color'
