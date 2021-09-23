@@ -94,17 +94,17 @@ alias ll='ls -l'
 alias grep='grep --color'
 alias be='bundle exec'
 alias dcs='docker-compose -f docker-compose.yml -f docker-compose-dev.yml'
-
+alias abrew="/opt/homebrew/bin/brew"
 
 # rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# M1: arch -arm64 rbenv install x.x.x
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # pyenv
-if which rbenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pbenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
