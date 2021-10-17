@@ -68,7 +68,7 @@ fd() {
 }
 
 # fzf: ブランチをインクリメンタルにチェックアウト
-fgc() {
+br() {
   git branch | fzf | xargs git checkout
 }
 
@@ -95,6 +95,9 @@ alias grep='grep --color'
 alias be='bundle exec'
 alias dcs='docker-compose -f docker-compose.yml -f docker-compose-dev.yml'
 alias abrew="/opt/homebrew/bin/brew"
+
+# tmux
+export TERM=xterm-256color
 
 # rbenv
 # M1: arch -arm64 rbenv install x.x.x
