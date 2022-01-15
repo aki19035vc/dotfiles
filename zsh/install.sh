@@ -7,5 +7,5 @@ ln -s ~/dotfiles/zsh/.zshrc $HOME
 
 mkdir -p $HOME/local/bin $HOME/local/lib
 
-source .zshenv
-source .zshrc
+source $HOME/.zshenv
+source $HOME/.zshrc
