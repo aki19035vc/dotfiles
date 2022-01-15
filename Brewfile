@@ -7,6 +7,7 @@ brew "rbenv"
 brew "pyenv"
 brew "tmux"
 brew "tree"
+brew "svn"
 
 cask "docker"
 cask "font-source-code-pro"
