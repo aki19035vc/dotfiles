@@ -1,1 +1,1 @@
-git clone https://github.com/a-fujisaki-gatech/.emacs.d.git $HOME/.emacs.d
+git clone git@github.com:akito-fujisaki/dotfiles.git $HOME/.emacs.d
