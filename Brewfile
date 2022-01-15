@@ -8,6 +8,7 @@ brew "pyenv"
 brew "tmux"
 brew "tree"
 brew "svn"
+brew "ripgrep"
 
 cask "docker"
 cask "font-source-code-pro"
