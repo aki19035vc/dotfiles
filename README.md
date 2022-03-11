@@ -1,12 +1,26 @@
 # dotfiles
 
-## How to install
-./install.sh
+## dotifileを配置方法
 
-## パッケージを追加する場合
-1. 名前がパッケージ名となるディレクトリを作成
-2. その中にinstall.shを作成
-3. install.shにインストール方法を記述
+```
+deploy.sh
+```
 
-## ターミナルのプロファイルの設定方法
-`mac-terminal-profile.terminal`をインポートしてください。
+※ Brewfileも配置されます
+
+## homebrewのインストール
+1. xcodeをインストール
+
+2. homebrewをインストール
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+3. Brewfileからアプリをインストール
+```
+brew bundle
+```
+
+## iterm2のプロファイル設定方法
+
+`Preferences > Profiles > Colors > Color Presets`でアクセスし、`Snazzy.itermcolors`をインポートする

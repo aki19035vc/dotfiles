@@ -18,6 +18,7 @@ zplug "junegunn/fzf-bin", \
       as:command, \
       rename-to:fzf, \
       use:"*darwin*amd64*"
+
 export FZF_DEFAULT_OPTS="--height 55% --reverse --border"
 
 # 未インストール項目をインストールする
@@ -48,8 +49,6 @@ chpwd() {ls}
 
 # 関数
 em() { emacs $1 & }
-
-dcs-clean() {docker-sync stop & docker-sync start & docker-compose up}
 
 # fzf: ヒストリーのインクリメンタル検索
 function select-history() {

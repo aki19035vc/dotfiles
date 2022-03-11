@@ -10,6 +10,7 @@ brew "tree"
 brew "svn"
 brew "ripgrep"
 
+cask "iterm2"
 cask "docker"
 cask "font-source-code-pro"
 cask "emacs-mac"
