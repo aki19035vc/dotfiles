@@ -1,6 +1,6 @@
 # dotfiles
 
-## dotifileを配置方法
+## dotifileの配置方法
 
 ```
 deploy.sh
