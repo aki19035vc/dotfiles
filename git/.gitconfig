@@ -10,3 +10,4 @@
 	co = checkout
 	me = merge
 	st = status
+	lg = log --oneline --graph
