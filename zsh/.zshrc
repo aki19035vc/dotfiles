@@ -1,3 +1,5 @@
+export ZPLUG_HOME=$HOME/.zplug
+
 source $ZPLUG_HOME/init.zsh
 
 zstyle ':completion:*:default' menu select=2
