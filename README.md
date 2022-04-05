@@ -28,3 +28,11 @@ brew bundle
 
 1. `Preferences > Profiles > Other Actions > Import JSON Profiles...`へアクセスし、`iterm2/profile_base_snazzy.json`をインポートする
 1. 追加された`profile_base_snazzy`を選択し、`Other Actions > Set as Default`でデフォルトに設定する
+
+## dockerコンテナ上でC-pを有効にする方法
+`~/.docker/config.json`に書きを追加する
+```
+{
+  "detachKeys": "ctrl-w,q"
+}
+```
