@@ -2,4 +2,4 @@
 
 cd $(dirname $0)
 
-ln -s .tmux.conf $HOME
+ln -s "$(pwd)/.tmux.conf" $HOME

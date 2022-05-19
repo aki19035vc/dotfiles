@@ -2,6 +2,5 @@
 
 cd $(dirname $0)
 
-ln -s .zshenv $HOME
-ln -s .zshrc $HOME
+ln -s "$(pwd)/.zshrc" $HOME
 git clone https://github.com/zplug/zplug $HOME/.zplug

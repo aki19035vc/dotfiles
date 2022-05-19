@@ -2,4 +2,4 @@
 
 cd $(dirname $0)
 
-ln -s Brewfile $HOME
+ln -s "$(pwd)/Brewfile" $HOME

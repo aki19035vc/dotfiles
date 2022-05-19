@@ -97,6 +97,9 @@ alias be='bundle exec'
 alias dcs='docker-compose -f docker-compose.yml -f docker-compose-dev.yml'
 alias abrew="/opt/homebrew/bin/brew"
 
+# homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+
 # tmux
 export TERM=xterm-256color
 
