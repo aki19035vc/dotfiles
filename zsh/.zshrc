@@ -37,6 +37,9 @@ zplug load --verbose
 # ディレクトリ名だけで移動
 setopt auto_cd
 
+# 改行をCtrl-jで行う
+bindkey '^J' self-insert
+
 # ls関連
 case "${OSTYPE}" in
     freebsd*|darwin*)
