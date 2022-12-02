@@ -11,6 +11,7 @@
 	me = merge
 	st = status
 	lg = log --oneline --graph
+	upush = push -u origin HEAD
 
 [pull]
 	ff = only
