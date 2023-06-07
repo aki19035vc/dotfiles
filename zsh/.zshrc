@@ -114,9 +114,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --wi
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # pyenv
-if which pbenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
