@@ -9,6 +9,7 @@ brew "tmux"
 brew "tree"
 brew "svn"
 brew "ripgrep"
+brew "source-highlight"
 
 cask "iterm2"
 cask "docker"
