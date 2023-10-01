@@ -10,6 +10,7 @@ brew "tree"
 brew "svn"
 brew "ripgrep"
 brew "source-highlight"
+brew "jq"
 
 cask "iterm2"
 cask "docker"
