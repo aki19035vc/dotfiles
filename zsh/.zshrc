@@ -110,7 +110,6 @@ export TERM=xterm-256color
 # M1: arch -arm64 rbenv install x.x.x
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # pyenv
