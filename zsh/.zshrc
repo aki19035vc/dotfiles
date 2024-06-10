@@ -121,5 +121,5 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # less (-LオプションでLESSOPENの指定を無視できる)
-export LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESSOPEN="| lesspipe.sh %s 2>&-"
 export LESS="-R"
