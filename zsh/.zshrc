@@ -12,14 +12,7 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# GitHub Releases からインストールする
-# また、コマンドは rename-to でリネームできる
-zplug "junegunn/fzf-bin", \
-      from:gh-r, \
-      as:command, \
-      rename-to:fzf, \
-      use:"*darwin*amd64*"
+zplug "junegunn/fzf"
 
 export FZF_DEFAULT_OPTS="--height 55% --reverse --border"
 
